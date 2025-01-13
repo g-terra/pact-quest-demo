@@ -3,7 +3,7 @@ package dev.terralab.blog.examples.pactquestdemo.contract.consumer;
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.junit5.PactConsumerTest;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
-import dev.terralab.blog.examples.pactquestdemo.client.QuestManagerClient;
+import dev.terralab.blog.examples.pactquestdemo.contract.consumer.client.QuestManagerClient;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package dev.terralab.blog.examples.pactquestdemo.client.base;
+package dev.terralab.blog.examples.pactquestdemo.contract.consumer.client.base;
 
 import java.net.URI;
 import java.net.http.HttpClient;

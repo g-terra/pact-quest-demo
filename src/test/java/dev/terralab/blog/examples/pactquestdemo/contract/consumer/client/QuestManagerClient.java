@@ -1,7 +1,7 @@
-package dev.terralab.blog.examples.pactquestdemo.client;
+package dev.terralab.blog.examples.pactquestdemo.contract.consumer.client;
 
-import dev.terralab.blog.examples.pactquestdemo.client.base.ApiResponse;
-import dev.terralab.blog.examples.pactquestdemo.client.base.ApiClient;
+import dev.terralab.blog.examples.pactquestdemo.contract.consumer.client.base.ApiResponse;
+import dev.terralab.blog.examples.pactquestdemo.contract.consumer.client.base.ApiClient;
 
 public class QuestManagerClient extends ApiClient {
 
