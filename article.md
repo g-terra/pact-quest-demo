@@ -179,7 +179,7 @@ To set up a consumer test for our API contract, we need to follow these key step
 
 ### 2. Prepare the Pact Annotations
 
--  In java, we need to use the \`@Pact\` annotation to specify the provider (QuestManagerApi) and the consumer (QuestManagerApiClient). This connects the test to the relevant services and will be used as identifiers in the pact document
+- In java, we need to use the \`@Pact\` annotation to specify the provider (QuestManagerApi) and the consumer (QuestManagerApiClient). This connects the test to the relevant services and will be used as identifiers in the pact document
 
 ### 3. Build the Pact Interaction
 
@@ -233,5 +233,5 @@ In this test, Pact works under the hood to create a mock server that simulates t
 
 By following these steps, you create a reliable test that ensures your consumer and provider remain aligned, preventing integration issues as both evolve.
 
-For more examples related to consumer-side contract testing[, yo](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[u can explore this demo's repository at ](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer).
+For more examples related to consumer-side contract testing, you can explore this demo's consumer package [here](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[u can explore this demo's repository at ](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer).
 
