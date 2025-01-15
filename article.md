@@ -2,6 +2,32 @@
 
 A Link to Reliable Microservices
 
+# Table of Contents
+
+1. [The Master Sword of Microservices Reliability](#the-master-sword-of-microservices-reliability)
+2. [Understanding API Contracts: The Sheikah Slate for Your Microservices Journey](#understanding-api-contracts-the-sheikah-slate-for-your-microservices-journey)
+3. [Designing an API Contract: Mapping the Castle’s Grounds for the Journey](#designing-an-api-contract-mapping-the-castle’s-grounds-for-the-journey)
+    - [The Quest Tracker Application](#the-quest-tracker-application)
+    - [Requirements](#requirements)
+    - [Architecture Overview](#architecture-overview)
+    - [Key Elements of the Contract](#key-elements-of-the-contract)
+4. [Enforcing API Contracts with Pact](#enforcing-api-contracts-with-pact)
+    - [Writing a Consumer Test with Pact](#writing-a-consumer-test-with-pact)
+    - [Add the Consumer Dependency](#add-the-consumer-dependency)
+    - [Interactions with Provider](#interactions-with-provider)
+    - [Define the Scope of the Consumer Test](#define-the-scope-of-the-consumer-test)
+    - [Prepare the Pact Annotations](#prepare-the-pact-annotations)
+    - [Build the Pact Interaction](#build-the-pact-interaction)
+    - [Verifying the Pact Contract](#verifying-the-pact-contract)
+5. [Exploring the Castle: The Provider's Perspective](#exploring-the-castle-the-providers-perspective)
+    - [Setting Up the Provider Dependency](#setting-up-the-provider-dependency)
+    - [Managing the Pact File](#managing-the-pact-file)
+    - [Verifying Interactions with Pact](#verifying-interactions-with-pact)
+    - [Managing Provider States](#managing-provider-states)
+    - [Mocked Repository vs. Real Storage](#mocked-repository-vs-real-storage)
+6. [Triumph in the Castle: A Harmonious Microservices Ecosystem](#triumph-in-the-castle-a-harmonious-microservices-ecosystem)
+
+---
 ## The Master Sword of Microservices Reliability
 
 In the legendary *The Legend of Zelda* video game series, the Master Sword is celebrated as the most powerful weapon a hero can wield. Known as the “Sword that Seals the Darkness,” it is a mythical blade imbued with the ability to banish chaos and restore balance. More than just a tool for battle, it is a symbol of strength, reliability, and the power to overcome overwhelming challenges. Without it, the hero, Link, would struggle to achieve victory against the forces of evil.
@@ -19,7 +45,6 @@ This article will guide you in wielding this powerful weapon with Pact. Whether 
 With API contracts in your arsenal, you’ll have the power to conquer the chaos of microservices and craft a system as legendary as the Master Sword itself.
 
 ---
-
 ## Understanding API Contracts: The Sheikah Slate for Your Microservices Journey
 
 In any grand adventure, a hero needs more than just a powerful weapon—they need guidance and tools to navigate complex challenges. In *The Legend of Zelda: Breath of the Wild*, Link relies on the Sheikah Slate, a mystical device that grants him access to maps, abilities, and crucial information about his environment. With it, he can traverse vast landscapes, solve intricate puzzles, and unlock secrets that would otherwise remain hidden.
@@ -35,7 +60,6 @@ An API contract is essentially a blueprint that defines the interaction between 
 By providing a single source of truth, API contracts illuminate the path forward, ensuring that all services are aligned and communication is seamless.
 
 ---
-
 ## Designing an API Contract: Mapping the Castle’s Grounds for the Journey
 
 Before diving into the tools for implementing contract testing, let’s set the stage for this grand adventure. In the world of microservices, think of the **consumer** as the adventurer, embarking on quests to achieve their mission, while the **provider** is the trusty castle, offering resources, treasures, and the occasional hidden trap (or error response) to make the journey memorable.
@@ -136,7 +160,6 @@ Now, let’s bring these roles to life with a practical example: This involves d
    - What happens if an invalid status transition is requested? E.g., Changing a quest from “completed” to “not started.”
 
 ---
-
 ## Enforcing API Contracts with Pact
 
 Pact is a contract testing tool that ensures seamless integration between APIs by validating the agreements (or contracts) established between consumers and producers. It works by enabling consumers to define their expectations for API behavior, which producers then use to validate their implementation. This ensures that changes in the API do not break existing integrations and helps catch mismatches early. For more details, refer to the [Pact documentation](https://docs.pact.io).
