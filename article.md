@@ -124,7 +124,7 @@ In this enchanting demo:
         ]
         ```
 
-   - **Updating a quest via **``**:**
+   - **Updating a quest via **`PUT /quest/{id}`**:**
 
       - **Input:** JSON body with a new quest status.
         ```json
