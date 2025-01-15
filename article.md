@@ -167,6 +167,7 @@ public class QuestManagerClient extends ApiClient {
 
     public record QuestUpdateRequest(String status) {
     }
+}
 ```
 
 ### Writing a Consumer Test with Pact:
