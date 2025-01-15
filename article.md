@@ -351,7 +351,7 @@ In this snippet, we simulate the existence of a quest with ID 1 in the database,
 
 ### Mocked Repository vs. Real Storage
 
-For demonstration purposes, the repository interactions are mocked using tools like Mockito. However, in real-world scenarios, it’s advisable to use [test containers]\(**[https://testcontainers.com/](https://testcontainers.com/)** )or similar tools to spin up actual databases in a controlled test environment. This approach allows tests to better mimic real-world conditions without requiring a full integration environment.
+For demonstration purposes, the repository interactions are mocked using tools like Mockito. However, in real-world scenarios, it’s advisable to use [test containers](**[https://testcontainers.com/](https://testcontainers.com/)**) or similar tools to spin up actual databases in a controlled test environment. This approach allows tests to better mimic real-world conditions without requiring a full integration environment.
 
 --- 
 ## Triumph in the Castle: A Harmonious Microservices Ecosystem
