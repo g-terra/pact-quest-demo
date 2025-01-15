@@ -174,23 +174,36 @@ public class QuestManagerClient extends ApiClient {
 
 To set up a consumer test for our API contract, we need to follow these key steps:
 
-### 1. Define the Scope of the Test
+#### Add the Consumer dependency:
 
-- Identify the interaction you want to test. In this case, we will use \`GET /quest\` endpoint for fetching a list of quests.
+For our demo, we are using Maven. To enable it for the project, we need to add the Pact dependency to the `pom.xml` file:
 
-### 2. Prepare the Pact Annotations
+```xml
+ <dependency>
+   <groupId>au.com.dius.pact.provider</groupId>
+   <artifactId>spring6</artifactId>
+   <version>4.6.16</version>
+   <scope>test</scope>
+</dependency>
+```
+
+#### Define the Scope of the Test
+
+- Now that our dependency is added, we can start identifying the interaction we want to test. For this example, lets use \`GET /quest\` endpoint which is used for  fetching a list of quests.
+
+#### Prepare the Pact Annotations
 
 - In java, we need to use the \`@Pact\` annotation to specify the provider (QuestManagerApi) and the consumer (QuestManagerApiClient). This connects the test to the relevant services and will be used as identifiers in the pact document
 
-### 3. Build the Pact Interaction
+#### Build the Pact Interaction
 
-&#x20;  Defining a test involves focusing on three key parts:
+&#x20;  Setting up the interaction is basically "transpiling" our contract to pact domain language. This involves focusing on three key parts:
 
-- **State Definition**: Establish the initial conditions or assumptions for the test (e.g., "at least one quesDefine what the provider should return, including the HTTP status code, response body, and headers. This helps validate that the provider can deliver the agreed-upon output for the consumer's request. Similary to the request, we here have willRespondWith() which will signalize pact about the begining of the response.e.
-- **Request Details**: Clearly specify the request that the consumer will send, including the HTTP method, endpoint, headers, and query parameters. This ensures the consumer's request aligns with the provider's expectations. In our code, this block starts with the uponReceiving() method.
+- **State Definition**: Establishes the initial conditions or assumptions for the interaction e.g., "at least one quest is present in the database". Pact uses the `given()` method to define the state.
+- **Request Details**: We must specify the request that the consumer will send.This means we configure here the HTTP method, endpoint, headers, and query parameters. This ensures the consumer's request aligns with the provider's expectations. In our code, this block starts with the uponReceiving() method.
 - **Response Expectations**: Define what the provider should return, including the HTTP status code, response body, and headers. This helps validate that the provider can deliver the agreed-upon output for the consumer's request. Similarly, for the response, we use willRespondWith(), which signals to Pact that the response block begins.
 
-
+Below is an example of how a full Pact interaction for the `GET /quest` endpoint might look:
 
 ```java
 
@@ -212,9 +225,9 @@ public V4Pact createPactForGetQuests(PactDslWithProvider builder) {
 }
 ```
 
-#### Running and Verifying the Test:
+### Verifying the Pact Contract
 
-To actually test the Pact contract from the consumer side, we simply create a unit test that triggers the mock server. Pact handles the setup of the mock server, manages responses, and ensures they match the defined contract.
+To actually test the Pact contract on the consumer side, we simply create a unit test that triggers the mock server. Pact handles the setup of the mock server, manages responses, and ensures they match the defined contract.
 
 ```java
 @Test
@@ -230,9 +243,9 @@ void should_respond_with_quests(MockServer mockServer) {
 }
 ```
 
-In this test, Pact works under the hood to create a mock server that simulates the provider's behavior. The mock server handles the responses and ensures they match the expectations defined in the contract. This allows the consumer’s requests to be validated against the contract without needing the actual provider implementation.
+behavior. The mock server manages responses and ensures they align with the expectations defined in the contract. This enables the consumer’s requests to be validated against the contract without requiring the actual provider implementation.
 
-By following these steps, you create a reliable test that ensures your consumer and provider remain aligned, preventing integration issues as both evolve.
+This approach provides a clean and streamlined method for writing contracts and integrating them into tests, eliminating the need to depend on the provider implementation or create complex mock setups.
 
-For more examples related to consumer-side contract testing, you can explore this demo's consumer package [here](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[u can explore this demo's repository at ](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer).
+For additional examples of consumer-side contract testing, explore the consumer package. [here](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[u can explore this demo's repository at ](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer).
 
