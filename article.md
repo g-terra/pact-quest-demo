@@ -103,7 +103,7 @@ In this enchanting demo:
 
 2. **Define the Inputs and Outputs**
 
-   - **Fetching the quests via **``**:**
+   - **Fetching the quests via **`GET /quest`**:**
 
       - **Input:** No request body required for fetching quests.
       - **Output:** JSON array containing quest details such as quest name, status, and reward.
