@@ -85,7 +85,7 @@ In this enchanting demo:
 - **Frontend Layer:** Like a detailed adventurer’s map, the UI components guide the interaction with the castle. These components rely on an API Client Implementation to navigate and communicate effectively.
 - **Backend Layer:** The Quest Manager API is the castle’s control room, managing data-related operations like validating inputs, interacting with databases, and formatting responses. This ensures that every adventurer’s request is processed efficiently and reliably, providing a seamless experience in the castle halls.
 
-![architecture.png](architecture.png)
+![Architecture Overview](architecture.png)
 
 Now, let’s bring these roles to life with a practical example: This involves detailing key elements such as endpoints, request formats, response payloads, and expected status codes. Let’s frame this with our demo example:
 
@@ -316,7 +316,7 @@ void pactVerificationTestTemplate(PactVerificationContext context) {
 
 When you run the test, Spring orchestrates the verification process by comparing the provider’s responses to the expectations outlined in the Pact file. This ensures alignment between the consumer and provider. Running the tests will generate results, and here we can visualize test failures:
 
-![failed-tests.png](failed-tests.png)
+![Screenshot of failed tests showing errors in the provider verification](failed-tests.png)
 
 ### Managing Provider States
 
