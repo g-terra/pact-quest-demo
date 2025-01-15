@@ -1,4 +1,5 @@
-# Crafting API Contracts with Pact 
+# Crafting API Contracts with Pact
+
 A Link to Reliable Microservices
 
 ## The Master Sword of Microservices Reliability
@@ -21,7 +22,6 @@ With API contracts in your arsenal, you’ll have the power to conquer the chaos
 
 ## Understanding API Contracts: The Sheikah Slate for Your Microservices Journey
 
-
 In any grand adventure, a hero needs more than just a powerful weapon—they need guidance and tools to navigate complex challenges. In *The Legend of Zelda: Breath of the Wild*, Link relies on the Sheikah Slate, a mystical device that grants him access to maps, abilities, and crucial information about his environment. With it, he can traverse vast landscapes, solve intricate puzzles, and unlock secrets that would otherwise remain hidden.
 
 In the realm of microservices, API contracts serve a similar purpose. They act as a guiding tool, mapping out how services should interact and helping development teams navigate the complexities of distributed systems. Without a clear API contract—much like Link without his Sheikah Slate—teams can easily get lost in a maze of miscommunication and integration issues.
@@ -36,116 +36,131 @@ By providing a single source of truth, API contracts illuminate the path forward
 
 ---
 
-## Designing an API Contract: Building the Map Before the Journey
+## Designing an API Contract: Mapping the Castle’s Grounds for the Journey
 
-Before we dive into the tools for implementing contract testing, let’s clarify the roles of microservices in a distributed system. Think of them as characters in a quest: the **consumer** is the eager adventurer, initiating requests to complete their mission, while the **provider** is the wise oracle, offering guidance and fulfilling those requests to enable success.
+Before diving into the tools for implementing contract testing, let’s set the stage for this grand adventure. In the world of microservices, think of the **consumer** as the adventurer, embarking on quests to achieve their mission, while the **provider** is the trusty castle, offering resources, treasures, and the occasional hidden trap (or error response) to make the journey memorable.
 
-Now, let’s bring these roles to life with a practical example:
+Now, let’s bring these roles to life with a practical example. This will involve outlining key elements such as endpoints, request formats, response payloads, and expected status codes. Let’s frame this using our demo example:
 
 ### The Quest Tracker Application
 
-We’re building a Quest Tracker Application, a system designed to help adventurers manage their quests effectively. The application will interact with a Quest Manager API, which serves as the backend service providing quest-related data and operations.
+Imagine we’re creating a Quest Tracker Application—a magical tool that helps adventurers (our consumers) manage their epic quests with ease. This application will interact with the Quest Manager API, a grand castle brimming with treasures (quest data) and challenges to overcome.
 
-In this demo:
+In this enchanting demo:
 
-- The **consumer** is the Quest Tracker Application, which initiates requests to fetch and update quest data.
-- The **provider** is the Quest Manager API, responsible for processing these requests and delivering the required responses.
-  
-**Requirements:**
+- **The consumer:** The Quest Tracker Application, the brave adventurer venturing forth to request and update quest data.
+- **The provider:** The Quest Manager API, the castle gatekeeper processing these requests and delivering treasures (or responses).
 
-1. **Fetching a list of quests:** The application will display all available quests, along with their details (e.g., name, status, and reward).
-2. **Updating the current status of a quest:** The application will allow users to update the status of a specific quest (e.g., marking it as completed or in-progress).
+### Requirements
 
----
+1. **Fetching a list of quests:** The application will display all available quests, complete with names, statuses, and rewards—because every adventurer loves loot.
+2. **Updating the status of a quest:** The application will allow users to update a quest’s status, marking it as completed or in progress.
 
-### **Architecture Overview:**
+### Architecture Overview
 
-- **Frontend Layer:** The UI components of the application will use an API Client Implementation which lives in the frontend code and manages all backend communication.
-- **Backend Layer:** The Quest Manager API processes requests and provides responses to fulfill the expectations set by the consumer. It acts as the backbone of the system, ensuring that all data-related operations are executed efficiently and accurately. This layer is where business logic resides, handling tasks like validating inputs, managing database interactions, and formatting output responses for the frontend consumer.
+- **Frontend Layer:** Like a detailed adventurer’s map, the UI components guide the interaction with the castle. These components rely on an API Client Implementation to navigate and communicate effectively.
+- **Backend Layer:** The Quest Manager API is the castle’s control room, managing data-related operations like validating inputs, interacting with databases, and formatting responses. This ensures that every adventurer’s request is processed efficiently and reliably, providing a seamless experience in the castle halls.
 
-![img.png](img.png)
+![architecture.png](architecture.png)
 
-Setting up an API contract begins with defining the interactions between services. These interactions should clearly establish what the consumer needs and what the provider guarantees to deliver. Think of it as drafting a treaty where both sides agree on the exact terms to avoid misunderstandings later. This involves detailing key elements such as endpoints, request formats, response payloads, and expected status codes. Let’s frame this with our demo example:
+Now, let’s bring these roles to life with a practical example: This involves detailing key elements such as endpoints, request formats, response payloads, and expected status codes. Let’s frame this with our demo example:
 
 ### Key Elements of the Contract:
 
 1. **Specify HTTP Methods and Endpoints**
 
-    - Endpoint: `/quest`
-        - **Method:** GET
-        - **Purpose:** Retrieve a list of all available quests.
-   
-    - Endpoint: `/quest/{id}`
-        - **Method:** PUT
-        - **Purpose:** Update the status of a specific quest.
+   - Endpoint: `/quest`
+      - **Method:** GET
+      - **Purpose:** Retrieve a list of all available quests.
+   - Endpoint: `/quest/{id}`
+      - **Method:** PUT
+      - **Purpose:** Update the status of a specific quest.
 
 2. **Define the Inputs and Outputs**
 
-    - **Fetching the quests via `GET /quest`:**
+   - **Fetching the quests via **``**:**
 
-        - **Input:** No request body required for fetching quests.
-        - **Output:** JSON array containing quest details such as quest name, status, and reward.
-          ```json
-          [
-            {
-              "id": 1,
-              "name": "Locate the Ancient Sword",
-              "status": "in-progress",
-              "reward": "100 gold"
-            },
-            {
-              "id": 2,
-              "name": "Rescue the Royal Heir",
-              "status": "not-started",
-              "reward": "Title of Champion"
-            }
-          ]
-          ```
-
-    - **Updating a quest via `PUT /quest/{id}`:**
-        - **Input:** JSON body with a new quest status.
-          ```json
-          {
-            "status": "COMPLETED"
-          }
-          ```
-        - **Output:** JSON object showing the updated quest details.
-          ```json
+      - **Input:** No request body required for fetching quests.
+      - **Output:** JSON array containing quest details such as quest name, status, and reward.
+        ```json
+        [
           {
             "id": 1,
             "name": "Locate the Ancient Sword",
-            "status": "COMPLETED",
+            "status": "in-progress",
             "reward": "100 gold"
+          },
+          {
+            "id": 2,
+            "name": "Rescue the Royal Heir",
+            "status": "not-started",
+            "reward": "Title of Champion"
           }
-          ```
+        ]
+        ```
+
+   - **Updating a quest via **``**:**
+
+      - **Input:** JSON body with a new quest status.
+        ```json
+        {
+          "status": "COMPLETED"
+        }
+        ```
+      - **Output:** JSON object showing the updated quest details.
+        ```json
+        {
+          "id": 1,
+          "name": "Locate the Ancient Sword",
+          "status": "COMPLETED",
+          "reward": "100 gold"
+        }
+        ```
 
 3. **Define Status Codes**
 
-    - `200 OK:` The request was successful.
-    - `404 Not Found:` The quest ID does not exist.
-      ```json
-      { "error": "Quest not found." }
-      ```
-    - `400 Bad Request:` Invalid input, such as an unsupported status value.
-      ```json
-      { "error": "Invalid quest status." }
-      ```
+   - `200 OK:` The request was successful.
+   - `404 Not Found:` The quest ID does not exist.
+     ```json
+     { "error": "Quest not found." }
+     ```
+   - `400 Bad Request:` Invalid input, such as an unsupported status value.
+     ```json
+     { "error": "Invalid quest status." }
+     ```
 
 4. **Document Edge Cases**
 
-    - What happens if a client sends an invalid status, like `paused`, to the `PUT /quest/{id}` endpoint?
-    - What happens if the requested quest ID doesn’t exist?
-    - What happens if an invalid status transition is requested? E.g., Changing a quest from “completed” to “not started.”
+   - What happens if a client sends an invalid status, like `paused`, to the `PUT /quest/{id}` endpoint?
+   - What happens if the requested quest ID doesn’t exist?
+   - What happens if an invalid status transition is requested? E.g., Changing a quest from “completed” to “not started.”
 
 ---
 
-### Enforcing API Contracts with Pact
+## Enforcing API Contracts with Pact
 
-With our API contract designed, it’s time to ensure that both the consumer (Quest Tracker application) and the provider (Quest Manager API) adhere to it. This is where Pact steps in. Pact facilitates consumer-driven contract testing, ensuring that the provider always meets the consumer’s expectations. By catching integration issues early, Pact significantly improves development efficiency and reduces runtime errors.
+Pact is a contract testing tool that ensures seamless integration between APIs by validating the agreements (or contracts) established between consumers and producers. It works by enabling consumers to define their expectations for API behavior, which producers then use to validate their implementation. This ensures that changes in the API do not break existing integrations and helps catch mismatches early. For more details, refer to the [Pact documentation](https://docs.pact.io).
 
-For this example, we’ll use Java and Spring to implement both the consumer and the provider. Pact serves as the enforcer, ensuring the two services remain in sync as they evolve.
+### Writing a Consumer Test with Pact:
 
-#### Consumer Code Implementation:
+To set up a consumer test for our API contract, let’s break it down into digestible steps that ensure clarity and precision. While this demo focuses on Java, the core principles and steps are highly replicable across all languages supported by Pact, making it a versatile tool for any development environment. Whether you’re slaying your first API dragon or are a seasoned knight in the realm of microservices, this guide will arm you with everything you need.
+
+### Add the Consumer Dependency
+
+Our demo project is a Java 21 application built with Spring Boot and leverages Spring 6. To manage dependencies, we are using Maven. For simplicity, both the consumer and provider code will be housed in the same repository. As we are focusing on the consumer side, we will need to add the consumer-specific dependency to enable Pact contract testing in our project. Here’s how you can set it up in your `pom.xml` file:
+
+```xml
+<dependency>
+    <groupId>au.com.dius.pact.consumer</groupId>
+    <artifactId>junit5</artifactId>
+    <version>4.6.16</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### Interactions with provider
+
+Before diving into the tests, let’s look at the code used to interact with our backend. This example demonstrates a simple client for managing quests:
 
 ```java
 public class QuestManagerClient extends ApiClient {
@@ -170,43 +185,27 @@ public class QuestManagerClient extends ApiClient {
 }
 ```
 
-### Writing a Consumer Test with Pact:
+This class abstracts API calls to the backend and serves as the adventurer’s essential toolkit on their journey through the backend world. Much like a detailed quest map, the `QuestManagerClient` provides clear and simple methods to fetch available quests (`getQuests`) and update their statuses (`updateQuestStatus`). It acts as the adventurer’s reliable guide, ensuring the path to treasures—or functional APIs—is smooth and well-marked. Its flexibility makes it easy to test and integrate into your development workflow, enabling you to focus on overcoming challenges with clarity and efficiency.
 
-To set up a consumer test for our API contract, we need to follow these key steps:
+### Define the Scope of the Consumer test
 
-#### Add the Consumer dependency:
+Think of this step as preparing your adventurer (consumer) to embark on a quest to the backend castle (provider). For this example, our brave adventurer is heading to the `GET /quest` endpoint to fetch a list of available quests. Each quest represents a task or challenge, and the endpoint is the map guiding our adventurer to these tasks.
 
-For our demo, we are using Maven. To enable it for the project, we need to add the Pact dependency to the `pom.xml` file:
+### Prepare the Pact Annotations
 
-```xml
- <dependency>
-   <groupId>au.com.dius.pact.provider</groupId>
-   <artifactId>spring6</artifactId>
-   <version>4.6.16</version>
-   <scope>test</scope>
-</dependency>
-```
+Every adventurer needs to register at the guild before starting a quest, and Pact annotations serve this purpose. Use the `@Pact` annotation to register your adventurer (consumer) and the castle (provider) they will interact with. For example, `QuestManagerApi` acts as the castle while `QuestManagerApiClient` is our adventurer. These annotations ensure the quests are tracked and identified correctly in the Pact document.
 
-#### Define the Scope of the Test
+### Build the Pact Interaction
 
-- Now that our dependency is added, we can start identifying the interaction we want to test. For this example, lets use \`GET /quest\` endpoint which is used for  fetching a list of quests.
+Now that the adventurer is ready, it’s time to describe the journey. Setting up the interaction in Pact is like documenting the adventurer’s planned actions and the castle’s expected responses. Focus on three key parts:
 
-#### Prepare the Pact Annotations
+- **State Definition**: This is the adventurer’s starting point, such as "at least one quest exists in the database." Use the `given()` method to define this state, ensuring the castle is prepared for the adventurer’s arrival.
+- **Request Details**: Here, the adventurer submits their request to the castle—like asking the guildmaster for a quest. Specify the HTTP method, endpoint, headers, and any query parameters using the `uponReceiving()` method.
+- **Response Expectations**: Once the adventurer makes their request, the castle provides a response—perhaps a quest with a detailed description. Define this response with the expected HTTP status, headers, and body using the `willRespondWith()` method.
 
-- In java, we need to use the \`@Pact\` annotation to specify the provider (QuestManagerApi) and the consumer (QuestManagerApiClient). This connects the test to the relevant services and will be used as identifiers in the pact document
-
-#### Build the Pact Interaction
-
-&#x20;  Setting up the interaction is basically "transpiling" our contract to pact domain language. This involves focusing on three key parts:
-
-- **State Definition**: Establishes the initial conditions or assumptions for the interaction e.g., "at least one quest is present in the database". Pact uses the `given()` method to define the state.
-- **Request Details**: We must specify the request that the consumer will send.This means we configure here the HTTP method, endpoint, headers, and query parameters. This ensures the consumer's request aligns with the provider's expectations. In our code, this block starts with the uponReceiving() method.
-- **Response Expectations**: Define what the provider should return, including the HTTP status code, response body, and headers. This helps validate that the provider can deliver the agreed-upon output for the consumer's request. Similarly, for the response, we use willRespondWith(), which signals to Pact that the response block begins.
-
-Below is an example of how a full Pact interaction for the `GET /quest` endpoint might look:
+Below is an example Pact interaction for the `GET /quest` endpoint:
 
 ```java
-
 @Pact(provider = "QuestManagerApi", consumer = "QuestManagerApiClient")
 public V4Pact createPactForGetQuests(PactDslWithProvider builder) {
     return builder.given("at least one quest exists in the database")
@@ -227,25 +226,116 @@ public V4Pact createPactForGetQuests(PactDslWithProvider builder) {
 
 ### Verifying the Pact Contract
 
-To actually test the Pact contract on the consumer side, we simply create a unit test that triggers the mock server. Pact handles the setup of the mock server, manages responses, and ensures they match the defined contract.
+Verifying the Pact contract is like an adventurer huddling with their team to review the attack strategy before charging into the castle. Skipping this step and screaming ["Leroy Jenkins!"](https://www.youtube.com/watch?v=Zll_jAKvarw) is the equivalent of deploying to production without tests—a surefire way to face utter chaos. This critical step ensures that every move, defense mechanism, and every strategy detail matches the plan crafted to overcome the castle’s defenses. To achieve this, we set up a unit test that triggers a mock server simulating the castle’s responses. Here, Pact steps in as the tactical advisor, meticulously analyzing every detail to confirm that the mock server’s responses align with the established contract, ensuring the adventurer is fully prepared for the challenges ahead.
 
 ```java
 @Test
 @PactTestFor(providerName = "QuestManagerApi", pactMethod = "createPactForGetQuests")
 void should_respond_with_quests(MockServer mockServer) {
-    var questManagerClient = new QuestManagerClient(mockServer.getUrl());
-    var quests = questManagerClient.getQuests();
-    assertThat(quests.success()).isTrue();
-    assertThat(quests.data()).hasSizeGreaterThan(0);
-    assertThat(quests.data()).allMatch(quest ->
-            List.of("NOT_STARTED", "IN_PROGRESS", "COMPLETED").contains(quest.status())
-    );
+   var questManagerClient = new QuestManagerClient(mockServer.getUrl());
+   var quests = questManagerClient.getQuests();
+   assertThat(quests.success()).isTrue();
+   assertThat(quests.data()).hasSizeGreaterThan(0);
+   assertThat(quests.data()).allMatch(quest ->
+           List.of("NOT_STARTED", "IN_PROGRESS", "COMPLETED").contains(quest.status())
+   );
 }
 ```
 
-behavior. The mock server manages responses and ensures they align with the expectations defined in the contract. This enables the consumer’s requests to be validated against the contract without requiring the actual provider implementation.
+In conclusion, this approach equips our adventurer with a reliable and efficient battle plan to tackle integration challenges. By meticulously crafting and verifying the Pact contract, the consumer is armed with a shield against unexpected API behavior, ensuring a seamless and predictable journey through the backend realm.
 
-This approach provides a clean and streamlined method for writing contracts and integrating them into tests, eliminating the need to depend on the provider implementation or create complex mock setups.
+For additional "adventures" of consumer-side contract testing, check out the [Pact Quest Demo repository](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer).
 
-For additional examples of consumer-side contract testing, explore the consumer package. [here](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[u can explore this demo's repository at ](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer)[https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer](https://github.com/g-terra/pact-quest-demo/tree/main/src/test/java/dev/terralab/blog/examples/pactquestdemo/contract/consumer).
+---
+## Exploring the Castle: The Provider's Perspective
+
+Once inside the castle (the provider’s domain), we need to ensure that every path, corridor, and hidden passage is meticulously prepared to meet the adventurer’s (consumer’s) expectations. Each route through the castle must lead to exactly what the adventurer seeks, ensuring smooth and reliable interactions at every turn. The provider’s role is critical: it’s not just about responding to requests but doing so consistently, reliably, and within the agreed-upon boundaries set by the API contract.
+
+### Setting Up the Provider Dependency
+
+To get started, include the necessary dependency for Spring-based provider-side testing:
+
+```xml
+<dependency>
+    <groupId>au.com.dius.pact.provider</groupId>
+    <artifactId>spring6</artifactId>
+    <version>4.6.16</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### Managing the Pact File
+
+The Pact file is a vital artifact in contract testing. It encapsulates the agreed-upon expectations between the consumer and provider. When you run your consumer tests, the Pact file is automatically generated and stored inside the `target` folder. For our demo, we’ve created a `make` command to automate the process of generating the file and moving it to a designated folder accessible to the provider. This ensures seamless integration. To integrate it effectively, you also need to set up your provider test class appropriately. For example:
+
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@Provider("QuestManagerApi")
+@PactFolder("pacts")
+public class QuestContractVerificationTest {
+    // tests
+}
+```
+
+This setup ensures that the provider uses the correct Pact file stored locally in the `pacts` folder, enabling the tests to validate interactions against the defined contract. While teams working in distributed environments might consider using a [Pact Broker](https://docs.pact.io/getting_started/sharing_pacts) for managing and sharing these files, for the purpose of this demo, we will keep things simple and store the Pact file locally in the repository.
+
+### Verifying Interactions with Pact
+
+Spring takes care of dynamically generating the provider tests based on the Pact files. The following snippet shows how to verify interactions:
+
+```java
+@TestTemplate
+@ExtendWith(PactVerificationSpring6Provider.class)
+void pactVerificationTestTemplate(PactVerificationContext context) {
+    context.verifyInteraction();
+}
+```
+
+When you run the test, Spring orchestrates the verification process by comparing the provider’s responses to the expectations outlined in the Pact file. This ensures alignment between the consumer and provider. Running the tests will generate results, and here we can visualize test failures:
+
+![failed-tests.png](failed-tests.png)
+
+### Managing Provider States
+
+Provider-side contract tests rely heavily on states to simulate different scenarios. States allow the provider to prepare its responses based on specific conditions, much like a castle readying its rooms to accommodate adventurers. Each state is like preparing treasures or setting traps within a tower (API endpoint) to challenge or reward the adventurer. For instance, you might ready a treasure chest in the form of a valid response or an enemy such as an error state to test the adventurer's resilience. For example:
+
+```java
+@State("Quest with ID 1 exists in the database")
+public Map<String, Object> questWithId1Exists() {
+    var id = 1L;
+    Mockito.when(questRepository.findById(id)).thenReturn(Optional.of(new Quest(id, "Quest 1", Status.NOT_STARTED, "100 XP")));
+    return Map.of("id", id);
+}
+```
+
+With this setup, we align with the principles of Test-Driven Development (TDD), ensuring that our provider implementation adheres to predefined consumer expectations.
+
+### Managing Provider States
+
+Provider-side contract tests rely heavily on states to simulate different scenarios. States allow the provider to prepare its responses based on specific conditions, much like a castle readying its rooms to accommodate adventurers. Each state is like preparing treasures or setting traps within a tower (API endpoint) to challenge or reward the adventurer. For instance, you might ready a treasure chest in the form of a valid response or an enemy such as an error state to test the adventurer's resilience. For example:
+
+```java
+@State("Quest with ID 1 exists in the database")
+public Map<String, Object> questWithId1Exists() {
+    var id = 1L;
+    Mockito.when(questRepository.findById(id)).thenReturn(Optional.of(new Quest(id, "Quest 1", Status.NOT_STARTED, "100 XP")));
+    return Map.of("id", id);
+}
+```
+
+In this snippet, we simulate the existence of a quest with ID 1 in the database, ensuring the provider meets the consumer's expectations for this state.
+
+### Mocked Repository vs. Real Storage
+
+For demonstration purposes, the repository interactions are mocked using tools like Mockito. However, in real-world scenarios, it’s advisable to use [test containers]\(**[https://testcontainers.com/](https://testcontainers.com/)** )or similar tools to spin up actual databases in a controlled test environment. This approach allows tests to better mimic real-world conditions without requiring a full integration environment.
+
+--- 
+## Triumph in the Castle: A Harmonious Microservices Ecosystem
+
+With Pact and other tools, we’re not just setting up some tests; we’re building a castle where every tower (API endpoint) shines like a reliable beacon. These towers don’t just look good—they deliver treasures (data) when our adventurers (consumers) need them and tame any lurking adversaries (errors).
+
+This harmonious system lets consumers and providers waltz together beautifully, all thanks to those trusty contracts. It’s like signing a magical treaty that says, "We’ll always understand each other." Using Pact, Spring, and advanced helpers like TestContainers, we can turn the chaos of distributed systems into a well-orchestrated symphony.
+
+In the end, we’re crafting more than code—we’re building a system that’s legendary, enduring, and as reliable as the Master Sword itself.
+
 
