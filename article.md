@@ -90,8 +90,6 @@ In this enchanting demo:
 
 ![Architecture Overview](architecture.png)
 
-Now, let’s bring these roles to life with a practical example: This involves detailing key elements such as endpoints, request formats, response payloads, and expected status codes. Let’s frame this with our demo example:
-
 ### Key Elements of the Contract:
 
 1. **Specify HTTP Methods and Endpoints**
