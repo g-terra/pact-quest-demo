@@ -13,7 +13,7 @@ A Link to Reliable Microservices
     - [Key Elements of the Contract](#key-elements-of-the-contract)
 4. [Enforcing API Contracts with Pact](#enforcing-api-contracts-with-pact)
     - [Writing a Consumer Test with Pact](#writing-a-consumer-test-with-pact)
-    - [Add the Consumer Dependency](#add-the-consumer-dependency)
+    - [Setting the consumer side](#setting-the-consumer-side)
     - [Interactions with Provider](#interactions-with-provider)
     - [Define the Scope of the Consumer Test](#define-the-scope-of-the-consumer-test)
     - [Prepare the Pact Annotations](#prepare-the-pact-annotations)
@@ -168,9 +168,9 @@ Pact is a contract testing tool that ensures seamless integration between APIs b
 
 To set up a consumer test for our API contract, let’s break it down into digestible steps that ensure clarity and precision. While this demo focuses on Java, the core principles and steps are highly replicable across all languages supported by Pact, making it a versatile tool for any development environment. Whether you’re slaying your first API dragon or are a seasoned knight in the realm of microservices, this guide will arm you with everything you need.
 
-### Add the Consumer Dependency
+### Setting the consumer side
 
-Our demo project is a Java 21 application built with Spring Boot and leverages Spring 6. To manage dependencies, we are using Maven. For simplicity, both the consumer and provider code will be housed in the same repository. As we are focusing on the consumer side, we will need to add the consumer-specific dependency to enable Pact contract testing in our project. Here’s how you can set it up in your `pom.xml` file:
+Our demo project is a Java 21 application built with Spring Boot and leverages Spring 6. These technologies were chosen for their modern capabilities, such as Java 21's enhanced performance features and Spring 6's advanced features like built-in dependency injection and enhanced testing tools, enabling us to demonstrate Pact in a simple and effective way. While Java was selected for this demo, Pact supports a wide range of languages such as Python, JavaScript, and Ruby, and the usage structure remains consistent across these ecosystems. To manage dependencies, we are using Maven. For simplicity, both the consumer and provider code will be housed in the same repository. As we are focusing on the consumer side, we will need to add the consumer-specific dependency to enable Pact contract testing in our project. Here’s how you can set it up in your pom.xml file:
 
 ```xml
 <dependency>
