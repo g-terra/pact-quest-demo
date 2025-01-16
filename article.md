@@ -171,11 +171,11 @@ Let’s delve into the essential elements that form the backbone of this contrac
 
 Pact is a contract testing tool that ensures seamless integration between APIs by validating the agreements (or contracts) established between consumers and producers. It works by enabling consumers to define their expectations for API behavior, which producers then use to validate their implementation. This ensures that changes in the API do not break existing integrations and helps catch mismatches early. For more details, refer to the [Pact documentation](https://docs.pact.io).
 
-### Writing a Consumer Test with Pact:
+### Writing a Consumer Test with Pact
 
 Setting up a consumer test for an API contract involves clear, structured steps. This guide, while focused on Java, is applicable across all Pact-supported languages, making it a versatile choice for any developer. Whether you’re new to API testing or experienced with microservices, these instructions will help you get started.
 
-## Setting Up the Consumer Side
+### The project setup
 
 Our demo project uses Java 21 with Spring Boot (Spring 6), chosen for their modern features such as Spring's advanced dependency injection and testing tools. Although this guide uses Java, Pact supports multiple languages (e.g., Python, JavaScript, Ruby) with a consistent structure across ecosystems.
 
