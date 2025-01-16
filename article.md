@@ -90,6 +90,12 @@ In this captivating demo:
 
 ![Architecture Overview](architecture.png)
 
+### Setting the hero's journey
+
+Before venturing into the implementation journey, it’s essential to first assess the adventurer’s (API Client Implementation) skills and anticipate the challenges they may encounter. Much like preparing a hero for their quest, we must ensure they are equipped with the right tools, knowledge, and strategies to overcome obstacles. A well-defined API contract serves as a guide and safeguard, ensuring the adventurer can confidently navigate the castle (Quest Manager API) and fulfill their mission.
+
+Let’s delve into the essential elements that form the backbone of this contract, paving the way for a smooth and successful interaction:
+
 ### Key Elements of the Contract:
 
 1. **Specify HTTP Methods and Endpoints**
