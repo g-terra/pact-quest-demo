@@ -224,24 +224,34 @@ public class QuestManagerClient extends ApiClient {
 ```
 
 This class abstracts API calls to the backend and serves as the adventurer’s essential toolkit on their journey through the backend world. Much like a detailed quest map, the `QuestManagerClient` provides clear and simple methods to fetch available quests (`getQuests`) and update their statuses (`updateQuestStatus`). It acts as the adventurer’s reliable guide, ensuring the path to treasures—or functional APIs—is smooth and well-marked. Its flexibility makes it easy to test and integrate into your development workflow, enabling you to focus on overcoming challenges with clarity and efficiency.
-
-### Define the Scope of the Consumer test
-
-Think of this step as preparing your adventurer (consumer) to embark on a quest to the backend castle (provider). For this example, our brave adventurer is heading to the `GET /quest` endpoint to fetch a list of available quests. Each quest represents a task or challenge, and the endpoint is the map guiding our adventurer to these tasks.
+### Define the Scope of the Consumer Test
+Think of this step as preparing your adventurer (consumer) to embark on a quest to the backend castle (provider). For this example, our brave adventurer is heading to the GET /quest endpoint to fetch a list of available quests. Each quest represents a task or challenge, and the endpoint is the map guiding our adventurer to these tasks.
 
 ### Prepare the Pact Annotations
+Every adventurer must register at the guild before embarking on a quest, and Pact annotations fulfill this role. For example, `QuestManagerApiClient` represents the adventurer interacting with the castle, `QuestManagerApi`. The `@Pact` annotation specifies the parties involved in the interaction and is later used to create the Pact file—a formal "contract" that both parties agree upon and use as the foundation for their development.
 
-Every adventurer must register at the guild before embarking on a quest, and Pact annotations fulfill this role. For example, QuestManagerApiClient represents the adventurer interacting with the castle, QuestManagerApi. The @Pact annotation specifies the parties involved in the interaction and is later used to create the Pact file—a formal "contract" that both parties agree upon and use as the foundation for their development.
+#### Example Empty Pact Method
+Below is a template for an empty method annotated with `@Pact`:
+
+```java
+@Pact(provider = "ProviderName", consumer = "ConsumerName")
+public V4Pact createEmptyPact(PactDslWithProvider builder) {
+    // Define the interaction here
+    return null;
+}
+```
 
 ### Build the Pact Interaction
-
 Now that the adventurer is ready, it’s time to describe the journey. Setting up the interaction in Pact is like documenting the adventurer’s planned actions and the castle’s expected responses. Focus on three key parts:
 
-- **State Definition**: This is the adventurer’s starting point, such as "at least one quest exists in the database." Use the `given()` method to define this state, ensuring the castle is prepared for the adventurer’s arrival.
-- **Request Details**: Here, the adventurer submits their request to the castle—like asking the guildmaster for a quest. Specify the HTTP method, endpoint, headers, and any query parameters using the `uponReceiving()` method.
-- **Response Expectations**: Once the adventurer makes their request, the castle provides a response—perhaps a quest with a detailed description. Define this response with the expected HTTP status, headers, and body using the `willRespondWith()` method.
+1. **State Definition**: This is the adventurer’s starting point, such as "at least one quest exists in the database." Use the `given()` method to define this state, ensuring the castle is prepared for the adventurer’s arrival.
 
-Below is an example Pact interaction for the `GET /quest` endpoint:
+2. **Request Details**: Here, the adventurer submits their request to the castle—like asking the guildmaster for a quest. Specify the HTTP method, endpoint, headers, and any query parameters using the `uponReceiving()` method.
+
+3. **Response Expectations**: Once the adventurer makes their request, the castle provides a response—perhaps a quest with a detailed description. Define this response with the expected HTTP status, headers, and body using the `willRespondWith()` method.
+
+### Example Pact Interaction
+Below is an example Pact interaction for the GET /quest endpoint:
 
 ```java
 @Pact(provider = "QuestManagerApi", consumer = "QuestManagerApiClient")
@@ -261,6 +271,10 @@ public V4Pact createPactForGetQuests(PactDslWithProvider builder) {
             .toPact(V4Pact.class);
 }
 ```
+
+By clearly defining the scope, preparing the annotations, and building the interaction, we create a robust foundation for consumer-driven contract testing. This ensures our adventurer can reliably retrieve their quests and that the backend castle remains consistent in its responses.
+
+
 
 ### Verifying the Pact Contract
 
