@@ -231,7 +231,7 @@ Think of this step as preparing your adventurer (consumer) to embark on a quest 
 
 ### Prepare the Pact Annotations
 
-Every adventurer needs to register at the guild before starting a quest, and Pact annotations serve this purpose. Use the `@Pact` annotation to register your adventurer (consumer) and the castle (provider) they will interact with. For example, `QuestManagerApi` acts as the castle while `QuestManagerApiClient` is our adventurer. These annotations ensure the quests are tracked and identified correctly in the Pact document.
+Every adventurer must register at the guild before embarking on a quest, and Pact annotations fulfill this role. For example, QuestManagerApiClient represents the adventurer interacting with the castle, QuestManagerApi. The @Pact annotation specifies the parties involved in the interaction and is later used to create the Pact file—a formal "contract" that both parties agree upon and use as the foundation for their development.
 
 ### Build the Pact Interaction
 
