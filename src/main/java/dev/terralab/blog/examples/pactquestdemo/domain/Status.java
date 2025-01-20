@@ -1,6 +1,6 @@
 package dev.terralab.blog.examples.pactquestdemo.domain;
 
-import dev.terralab.blog.examples.pactquestdemo.execption.InvalidStatusException;
+import dev.terralab.blog.examples.pactquestdemo.exception.InvalidStatusException;
 
 public enum Status {
     NOT_STARTED,

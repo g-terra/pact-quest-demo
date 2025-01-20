@@ -1,4 +1,4 @@
-package dev.terralab.blog.examples.pactquestdemo.execption;
+package dev.terralab.blog.examples.pactquestdemo.exception;
 
 import dev.terralab.blog.examples.pactquestdemo.dto.ErrorResponseDto;
 import org.springframework.http.HttpStatus;

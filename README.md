@@ -1,6 +1,11 @@
 # Quest Manager API
 
-This project demonstrates how to create and consume API contracts using Java, Spring Boot, and Maven.
+
+
+This project serves as a demonstration of consumer contract testing using the Pact framework and acts as an example for the article [Crafting API Contracts with Pact](https://github.com/g-terra/pact-quest-demo/blob/main/article.md).
+
+The demo illustrates how to create and consume API contracts with Pact, leveraging Java, Spring Boot, and Maven.
+
 
 ## Prerequisites
 
