@@ -1,6 +1,4 @@
-# Quest Manager API
-
-
+# Crafting API Contracts with Pact. 
 
 This project serves as a demonstration of consumer contract testing using the Pact framework and acts as an example for the article [Crafting API Contracts with Pact](https://github.com/g-terra/pact-quest-demo/blob/main/article.md).
 
